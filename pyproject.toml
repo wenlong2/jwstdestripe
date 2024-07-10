@@ -24,6 +24,7 @@ dependencies = [
   "astropy",
   "photutils",
   "importlib",
+  "importlib-metadata",
 ]
 
 [project.urls]
