@@ -13,7 +13,7 @@ authors = [
 ]
 description = "A Python package to remove the 1/f noise in JWST NIRCam *_cal.fits images"
 readme = "README.md"
-requires-python = ">=3.6"
+requires-python = ">=3.8"
 classifiers = [
   "Programming Language :: Python :: 3",
   "Operating System :: OS Independent",
@@ -24,7 +24,6 @@ dependencies = [
   "astropy",
   "photutils",
   "importlib",
-  "importlib-metadata",
 ]
 
 [project.urls]
