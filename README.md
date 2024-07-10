@@ -13,7 +13,7 @@ A NIRCam 1/f Noise Removal package
 
 ## Installation
 
-``pip install jwstdescripe``
+``pip install git+https://github.com/wenlong2/jwstdestripe``
 
 ## Tutorial & Example
 

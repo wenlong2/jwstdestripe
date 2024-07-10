@@ -23,6 +23,7 @@ dependencies = [
   "scipy",
   "astropy",
   "photutils",
+  "importlib",
 ]
 
 [project.urls]
