@@ -1,0 +1,31 @@
+[build-system]
+requires = [
+  "hatchling",
+]
+build-backend = "hatchling.build"
+
+[project]
+name = "jwstdestripe"
+version = "0.0.1"
+#dynamic = ["version"]
+authors = [
+  { name = "Wenlong Yuan", email = "wenlongtamu@gmail.com" }
+]
+description = "A Python package to remove the 1/f noise in JWST NIRCam *_cal.fits images"
+readme = "README.md"
+requires-python = ">=3.6"
+classifiers = [
+  "Programming Language :: Python :: 3",
+  "Operating System :: OS Independent",
+]
+dependencies = [
+  "numpy",
+  "scipy",
+  "astropy",
+  "photutils",
+]
+
+[project.urls]
+Homepage = "https://github.com/wenlong2/jwstdestripe"
+Issues = "https://github.com/wenlong2/jwstdestripe/issues"
+
