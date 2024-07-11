@@ -9,13 +9,11 @@ jobs:
 
         steps:
         - name: setup Python
-          uses: actions/setup-python@v4
+          uses: actions/setup-python@v5
           with:
             python-version: "3.x"
         - name: install build
           run: python3 -m pip install build --user
-        - name: ls
-          run: ls -lart */*
         - name: build wheel + tarball
           run: python3 -m build
         - name: store the package
