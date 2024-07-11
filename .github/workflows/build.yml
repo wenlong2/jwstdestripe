@@ -14,6 +14,8 @@ jobs:
             python-version: "3.x"
         - name: install build
           run: python3 -m pip install build --user
+        - name: ls
+          run: ls -lart
         - name: build wheel + tarball
           run: python3 -m build
         - name: store the package
