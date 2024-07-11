@@ -9,6 +9,7 @@ A NIRCam 1/f Noise Removal package
 - Keep overall background level
 - Subtract row median for each amplifier
 - Pixels with zero counts are excluded from calculation
+- Point sources are excluded from the median derivation
 - Results saved to FITS files
 
 ## Installation

@@ -7,7 +7,6 @@ build-backend = "hatchling.build"
 [project]
 name = "jwstdestripe"
 version = "0.0.1"
-#dynamic = ["version"]
 authors = [
   { name = "Wenlong Yuan", email = "wenlongtamu@gmail.com" }
 ]
