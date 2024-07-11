@@ -5,9 +5,9 @@ on: push
 jobs:
     build:
         name: build distribution
-        runs-on: ubuntu-latest
-
+        runs-on: macos-latest
         steps:
+        - uses: actions/checkout@v4
         - name: setup Python
           uses: actions/setup-python@v5
           with:
@@ -15,7 +15,7 @@ jobs:
         - name: install build
           run: python3 -m pip install build --user
         - name: build wheel + tarball
-          run: python3 -m build /home/runner/work/jwstdestripe
+          run: python3 -m build
         - name: store the package
           uses: actions/upload-artifact@v4
           with:
