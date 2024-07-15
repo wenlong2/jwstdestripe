@@ -2,6 +2,7 @@ from astropy.io import fits
 from photutils.background import Background2D
 import numpy as np
 from astropy.stats import sigma_clipped_stats
+from shutil import copyfile
 
 class destripe:
     def __init__(self, f):
@@ -33,7 +34,11 @@ class destripe:
         # write results into FITS files
         hdr = self.hdr
         f_out = self.imgfile.replace('.fits', '_sub1of.fits')
-        fits.writeto(f_out, a5.astype('float32'), header=hdr, overwrite=True)
+        copyfile(self.imgfile, f_out)
+        hdu = fits.open(f_out, mode='update')
+        hdu[1].data = a5.astype('float32')
+        hdu.flush()
+        hdu.close()
         f_out = self.imgfile.replace('.fits', '_1of.fits')
         fits.writeto(f_out, a4.astype('float32'), header=hdr, overwrite=True)
         return a5, a4
