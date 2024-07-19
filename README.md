@@ -5,6 +5,7 @@ A NIRCam 1/f Noise Removal package
 ## Features:
 
 - Robustly remove the JWST NIRCam 1/f Noise
+- Easy to install and easy to use
 - Preserve original background gradient
 - Preserve overall background level
 - Subtract row 1/f noise for each amplifier
