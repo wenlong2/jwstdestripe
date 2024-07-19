@@ -14,7 +14,7 @@ class destripe:
         self.arr = arr
         self.hdr = hdr
 
-    def destripe(self, bgd_scale=25, src_thres=2.5):
+    def destripe(self, column=False, bgd_scale=25, src_thres=2.5):
         # Compute and substract the overall sky gradient first,
         # otherwise a direct row median would change the original
         # sky gradient
@@ -31,6 +31,16 @@ class destripe:
         a5[idx] = 0
         idx = np.isnan(a5)
         a5[idx] = 0
+        if column:
+            a6, sky = self.jwst_rm2dsky(a5, scale=bgd_scale)
+            a7 = self.jwst_mask_src(a6)
+            a8 = self.cal_colmedian(a7)
+            a5 = a5 - a8
+            a4 = a4 + a8
+            idx = self.arr == 0
+            a5[idx] = 0
+            idx = np.isnan(a5)
+            a5[idx] = 0
         # write results into FITS files
         hdr = self.hdr
         f_out = self.imgfile.replace('.fits', '_sub1of.fits')
@@ -53,6 +63,13 @@ class destripe:
         # Subtract an overall median offset of those median values, if any
         a -= np.nanmedian(a)
         return a
+
+    def cal_colmedian(self, a):
+        n = int(a.shape[0])
+        cmed = np.nanmedian(a, 0)
+        m = np.tile(cmed, (n,1))
+        m -= np.nanmedian(m)
+        return m
 
     def jwst_rm2dsky(self, a, scale):
         # JWST convention: "0" means no data. Mask them first
