@@ -10,8 +10,8 @@ A NIRCam 1/f Noise Removal package
 - Subtract row 1/f noise for each amplifier
 - With the option to remove column 1/f noise altogether
 - Pixels with zero counts are excluded from calculation
-- Point sources are excluded from the median derivation
-- Results saved to FITS files
+- Point sources are excluded from the median calculation
+- Results saved to FITS files and new arrays returned
 
 ## Installation
 
