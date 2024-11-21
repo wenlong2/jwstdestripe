@@ -2,6 +2,10 @@
 
 A NIRCam 1/f Noise Removal package
 
+## Update:
+
+`v0.0.2`: NIRCam missing value convention changed to NaN from zero. This package is updated accordingly. 11/21/2024.
+
 ## Features:
 
 - Robustly remove the JWST NIRCam 1/f Noise

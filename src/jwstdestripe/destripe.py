@@ -4,6 +4,8 @@ import numpy as np
 from astropy.stats import sigma_clipped_stats
 from shutil import copyfile
 
+missing_value = np.nan # this convention changed
+
 class destripe:
     def __init__(self, f):
         self.imgfile = f
@@ -27,20 +29,16 @@ class destripe:
         a4 = self.cal_rowmedian(a3s, a1+np.nan)
         a5 = self.arr - a4
         # fix those no-observation pixels
-        idx = self.arr == 0
-        a5[idx] = 0
-        idx = np.isnan(a5)
-        a5[idx] = 0
+        idx = np.isnan(self.arr)
+        a5[idx] = np.nan
         if column:
             a6, sky = self.jwst_rm2dsky(a5, scale=bgd_scale)
             a7 = self.jwst_mask_src(a6)
             a8 = self.cal_colmedian(a7)
             a5 = a5 - a8
             a4 = a4 + a8
-            idx = self.arr == 0
-            a5[idx] = 0
-            idx = np.isnan(a5)
-            a5[idx] = 0
+            idx = np.isnan(self.arr)
+            a5[idx] = np.nan
         # write results into FITS files
         hdr = self.hdr
         f_out = self.imgfile.replace('.fits', '_sub1of.fits')
@@ -72,19 +70,14 @@ class destripe:
         return m
 
     def jwst_rm2dsky(self, a, scale):
-        # JWST convention: "0" means no data. Mask them first
-        idx = a == 0
-        a[idx] = np.nan
+        idx = np.isnan(a)
         sky = Background2D(a, scale).background
         # Convert back to JWST convention
-        a[idx] = 0
-        sky[idx] = 0
+        a[idx] = np.nan
+        sky[idx] = np.nan
         return a-sky, sky
 
     def jwst_mask_src(self, a, threshold=2.5):
-        # JWST convention: "0" means no data. Mask them first
-        idx = a == 0
-        a[idx] = np.nan
         mean, median, std = sigma_clipped_stats(a, maxiters=100)
         idx = np.abs(a-median) > std * threshold
         a[idx] = np.nan
